@@ -1,3 +1,11 @@
+import dash_table
+import plotly
+import plotly.graph_objs as go
+
+import pandas as pd
+import numpy as np
+from flask import Flask
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -24,14 +32,14 @@ app = dash.Dash(
     external_stylesheets=external_css
 )
 
-app.config.update({
+#app.config.update({
     # as the proxy server will remove the prefix
-    'routes_pathname_prefix': '/terremotopi/',
+#    'routes_pathname_prefix': '/terremotopi/',
 
     # the front-end will prefix this string to the requests
     # that are made to the proxy server
-    'requests_pathname_prefix': '/terremotopi/'
-})
+#    'requests_pathname_prefix': '/terremotopi/'
+#})
 
 server = app.server
 
@@ -40,25 +48,25 @@ server = app.server
 
 app.layout = html.Div([
     html.Div([
-        html.H2("Wind Speed Streaming"),
+        html.H2("Acceleration Streaming"),
        
     ], className='banner'),
     html.Div([
         html.Div([
-            html.H3("WIND SPEED (mph)")
+            html.H3("Acceleration (m/s^2)")
         ], className='Title'),
         html.Div([
-            dcc.Graph(id='wind-speed'),
-        ], className='twelve columns wind-speed'),
-        dcc.Interval(id='wind-speed-update', interval=1000, n_intervals=0),
-    ], className='row wind-speed-row')
+            dcc.Graph(id='acceleration'),
+        ], className='twelve columns acceleration'),
+        dcc.Interval(id='acceleration-update', interval=1000, n_intervals=0),
+    ], className='row acceleration-row')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'}
 )
 
 
-@app.callback(Output('wind-speed', 'figure'), [Input('wind-speed-update', 'n_intervals')])
+@app.callback(Output('acceleration', 'figure'), [Input('acceleration-update', 'n_intervals')])
 def gen_wind_speed(interval):
     now = dt.datetime.now()
     sec = now.second
