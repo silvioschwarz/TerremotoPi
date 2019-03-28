@@ -15,8 +15,8 @@ sudo ./plotlyPreRelease.sh
 deactivate
 
 echo '
-accesslog = "/home/pi/Documents/Earthquake-Distances/logs/gunicorn_access.log"
-errorlog = "/home/pi/Documents/Earthquake-Distances/logs/gunicorn_error.log"' > gunicorn.conf
+accesslog = "./logs/gunicorn_access.log"
+errorlog = "./logs/gunicorn_error.log"' > gunicorn.conf
 
 mkdir logs
 
