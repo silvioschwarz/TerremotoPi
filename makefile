@@ -9,13 +9,13 @@ git:
 	sudo apt-get install -y git git-core git-gui git-doc
 	git config --global user.name "Silvio Schwarz"
 	git config --global user.email admin@silvioschwarz.com
-install: 
+installl: 
 	@echo $@  # print target name
 	./install/pythonInstall.sh
 	./install/plotlyDash.sh
-        sudo apt-get install apache2 mysql-client apache2-dev libapache2-mod-php php php-mysql mysql-server apache2-utils libexpat1 ssl-cert libapache2-mod-wsgi
+	sudo apt-get install apache2 mysql-client apache2-dev libapache2-mod-php php php-mysql mysql-server apache2-utils libexpat1 ssl-cert libapache2-mod-wsgi
 	./install/modEnable.sh
-	#vhosts and gunicorn?
+	./install/appInstall.sh
 node:
 	@echo $@  # print target name
 	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash

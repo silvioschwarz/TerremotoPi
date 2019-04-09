@@ -1,3 +1,5 @@
+#! /bin/python3
+
 import dash_table
 import plotly
 import plotly.graph_objs as go
@@ -141,5 +143,5 @@ def gen_wind_speed(interval):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
-#    app.run_server(debug=True, host='127.0.0.1', port=5000)
+#    app.run_server(debug=True)
+    app.run_server(debug=True, host='127.0.0.1', port=5000)
