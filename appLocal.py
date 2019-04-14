@@ -43,7 +43,6 @@ app = dash.Dash(
 #    'requests_pathname_prefix': '/terremotopi/'
 #})
 
-app.config.requests_pathname_prefix = ''
 server = app.server
 
 #app.css.config.serve_locally = True
@@ -52,6 +51,7 @@ server = app.server
 app.layout = html.Div([
     html.Div([
         html.H2("Acceleration Streaming"),
+       
     ], className='banner'),
     html.Div([
         html.Div([
@@ -138,7 +138,7 @@ def gen_wind_speed(interval):
             r=50
         ),
 	transition=dict(
-                duration=500,
+                duration=200,
                 easing="cubic-in-out")
     )
 
@@ -146,5 +146,5 @@ def gen_wind_speed(interval):
 
 
 if __name__ == '__main__':
-#    app.run_server(debug=True)
-    app.run_server(debug=True, host='127.0.0.1', port=5000)
+    app.run_server(debug=True)
+#    app.run_server(debug=True, host='127.0.0.1', port=5000)
