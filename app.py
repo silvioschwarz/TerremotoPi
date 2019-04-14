@@ -43,6 +43,7 @@ app = dash.Dash(
 #    'requests_pathname_prefix': '/terremotopi/'
 #})
 
+app.config.requests_pathname_prefix = ''
 server = app.server
 
 #app.css.config.serve_locally = True
@@ -51,7 +52,6 @@ server = app.server
 app.layout = html.Div([
     html.Div([
         html.H2("Acceleration Streaming"),
-       
     ], className='banner'),
     html.Div([
         html.Div([

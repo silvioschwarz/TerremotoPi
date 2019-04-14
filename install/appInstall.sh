@@ -4,8 +4,8 @@ sudo apt-get install python3-venv
 
 sudo ./modEnable.sh
 
-#sudo python3.5 -m venv venv
-sudo virtualenv venv
+sudo python3.5 -m venv venv
+#sudo virtualenv venv
 source venv/bin/activate
 
 sudo -H pip3 install -r requirements.txt

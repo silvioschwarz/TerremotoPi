@@ -1,0 +1,14 @@
+[Unit]
+Description=TerremotoPi - a RaspberryPi powered seismological station with live stream capabilities
+After=network.target
+
+[Service]
+User=pi
+Group=www-data
+Restart=on-failure
+WorkingDirectory=/home/pi/TerremotoPi/
+Environment="PATH=/home/pi/TerremotoPi/flaskvenv/bin"
+ExecStart=/home/pi/TerremotoPi/flaskvenv/bin/gunicorn -c /home/pi/TerremotoPi/gunicorn.conf -b 0.0.0.0:5000 -w 6 unix:terremotopi.sock -m 007 app:app.server
+
+[Install]
+WantedBy=multi-user.target
