@@ -60,7 +60,7 @@ app.layout = html.Div([
         html.Div([
             dcc.Graph(id='acceleration'),
         ], className='twelve columns acceleration'),
-        dcc.Interval(id='acceleration-update', interval=1000, n_intervals=0),
+        dcc.Interval(id='acceleration-update', interval=500, n_intervals=0),
     ], className='row acceleration-row')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
@@ -74,8 +74,9 @@ def gen_wind_speed(interval):
     sec = now.second
     minute = now.minute
     hour = now.hour
+    #microsecond = now.microsecond
 
-    total_time = (hour * 3600) + (minute * 60) + (sec)
+    total_time = (hour * 3600) + (minute * 60) + (sec)# + (microsecond)
 
     con = sqlite3.connect("./data/acceleration-data.db")
     df = pd.read_sql_query('SELECT Time, X, Y, Z from acceleration where\
@@ -136,10 +137,10 @@ def gen_wind_speed(interval):
             t=45,
             l=50,
             r=50
-        ),
-	transition=dict(
-                duration=200,
-                easing="cubic-in-out")
+        )#,
+	#transition=dict(
+        #        duration=200,
+        #        easing="cubic-in-out")
     )
 
     return Figure(data=[trace1, trace2, trace3], layout=layout)
