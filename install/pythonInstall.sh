@@ -3,9 +3,9 @@
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get install -y build-essential python-dev python-pip python-smbus python3-pip
+sudo apt-get install -y build-essential python-dev python-smbus
 
-pip3 install --user RPi.GPIO setuptools
+python3 -m pip install --user RPi.GPIO setuptools
 
 sudo apt-get install -y i2c-tools
 
@@ -18,5 +18,5 @@ echo "/dev/i2c-1 /dev/spidev0.0 /dev/spidev0.1"
 
 echo "INSTALL CIRCUIT PYTHON"
 
-pip3 install --user adafruit-blinka
+python3 -m pip install --user adafruit-blinka
 

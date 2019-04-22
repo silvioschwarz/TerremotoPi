@@ -2,15 +2,16 @@
 
 sudo apt-get install python3-venv
 
-sudo ./modEnable.sh
+sudo ./install/modEnable.sh
 
 sudo python3.5 -m venv venv
 #sudo virtualenv venv
 source venv/bin/activate
 
-sudo -H pip3 install -r requirements.txt
-sudo ./plotlyPreRelease.sh
+python3 -m pip install -r --user requirements.txt
+#sudo ./plotlyPreRelease.sh
 #sudo ./virtualHostInstall.sh
+python3 -m pip install --user adafruit_blinka adafruit-circuitpython-fxos8700 adafruit-circuitpython-fxas21002c
 
 deactivate
 
