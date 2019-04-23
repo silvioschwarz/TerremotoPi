@@ -1,0 +1,27 @@
+{
+  "name": "terremotopijs",
+  "version": "1.0.0",
+  "description": "real-time seismic data via nodejs, powered by raspberrypi",
+  "main": "stream.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "ws": "^6.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node stream.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvioschwarz/TerremotoPi.git"
+  },
+  "keywords": [
+    "seismology"
+  ],
+  "author": "Silvio Schwarz",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/silvioschwarz/TerremotoPi/issues"
+  },
+  "homepage": "https://github.com/silvioschwarz/TerremotoPi#readme"
+}
