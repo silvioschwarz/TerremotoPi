@@ -18,5 +18,5 @@ echo "/dev/i2c-1 /dev/spidev0.0 /dev/spidev0.1"
 
 echo "INSTALL CIRCUIT PYTHON"
 
-python3 -m pip install --user adafruit-blinka
+python3 -m pip install --user adafruit_blinka adafruit-circuitpython-fxos8700 adafruit-circuitpython-fxas21002c
 

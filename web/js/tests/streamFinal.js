@@ -63,6 +63,14 @@ app.get('/', function (req, res) {
 </html>`)
 })
 
+function getData() {
+  return spawn('python3', [
+    "-u",
+    path.join(__dirname, 'NXP.py'),
+  ]);
+}
+
+
 function runScriptInWebsocket(id, ws) {
   const child = runScript("foobar")
   child.stdout.on('data', (data) => {
