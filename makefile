@@ -9,7 +9,7 @@ git:
 	sudo apt-get install -y git git-core git-gui git-doc
 	git config --global user.name "Silvio Schwarz"
 	git config --global user.email admin@silvioschwarz.com
-installl: 
+install: 
 	@echo $@  # print target name
 	./install/pythonInstall.sh
 	./install/plotlyDash.sh

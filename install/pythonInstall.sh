@@ -18,5 +18,5 @@ echo "/dev/i2c-1 /dev/spidev0.0 /dev/spidev0.1"
 
 echo "INSTALL CIRCUIT PYTHON"
 
-pip3 install --user adafruit-blinka
+python3 -m pip install --user adafruit-blinka
 
