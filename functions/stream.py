@@ -1,12 +1,17 @@
+<<<<<<< HEAD
+=======
+import datetime
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 import time
-
 import board
 import busio
-
 import adafruit_fxos8700
+import datetime
+from plotly.graph_objs import Scatter, Layout, Figure
 
 import plotly
 import plotly.plotly as py
+<<<<<<< HEAD
 
 from plotly.graph_objs import *
  
@@ -14,69 +19,91 @@ import numpy as np
 import plotly.tools as tls   
 plotly.tools.set_credentials_file(username='slvschwrz', api_key='8XzVPYd7tK4xOY95PYc3',
 stream_ids=['4tcm3qzb59', '62t28phmdl', 'v0uay8rbym', '3f2fhox5ht'])
+=======
+import plotly.tools as tls
+from plotly.graph_objs import *
+
+import numpy as np
+
+
+username = 'slvschwrz'
+api_key = '8XzVPYd7tK4xOY95PYc3'
+
+
+py.sign_in(username, api_key)
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 
 stream_ids = tls.get_credentials_file()['stream_ids']
 #print(stream_ids)
 
+<<<<<<< HEAD
 stream_id= stream_ids[0]
 
+=======
+print(stream_ids)
+
+stream_id= stream_ids[0]
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 stream1 = scatter.Stream(
-    token= stream_ids[0],  # (!) link stream id to 'token' key
-    maxpoints=800      # (!) keep a max of 80 pts on screen
+    token= stream_ids[0],
+    maxpoints=800
 )
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 trace1 = Scatter(
     x=[],
     y=[],
     name='X',
     mode='lines+markers',
-    stream=stream1         # (!) embed stream id, 1 per trace
+    stream=stream1
 )
 
 stream2 = scatter.Stream(
-    token= stream_ids[1],  # (!) link stream id to 'token' key
-    maxpoints=800      # (!) keep a max of 80 pts on screen
+    token= stream_ids[1],
+    maxpoints=800
 )
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 trace2 = Scatter(
     x=[],
     y=[],
     name='Y',
     mode='lines+markers',
-    stream=stream2         # (!) embed stream id, 1 per trace
+    stream=stream2
 )
 
 stream3 = scatter.Stream(
-    token= stream_ids[2],  # (!) link stream id to 'token' key
-    maxpoints=800      # (!) keep a max of 80 pts on screen
+    token= stream_ids[2],
+    maxpoints=800
 )
 
-
-# Initialize trace of streaming plot by embedding the unique stream_id
 trace3 = Scatter(
     x=[],
     y=[],
     name='Z',
     mode='lines+markers',
-    stream=stream3         # (!) embed stream id, 1 per trace
+
+    stream=stream3
 )
 
-# Make instance of stream id object 
 stream4 = scatter.Stream(
-    token= stream_ids[3],  # (!) link stream id to 'token' key
-    maxpoints=800     # (!) keep a max of 80 pts on screen
+    token= stream_ids[3],
+    maxpoints=800
 )
 
-
-# Initialize trace of streaming plot by embedding the unique stream_id
 trace4 = Scatter(
     x=[],
     y=[],
     name='Temperature',
     mode='lines+markers',
-    stream=stream4         # (!) embed stream id, 1 per trace
+
+    stream=stream4
 )
 
 
@@ -84,7 +111,6 @@ trace4 = Scatter(
 data = [trace1, trace2, trace3]
 
 
-# Add title to layout object
 layout = Layout(title='Time Series',
 	xaxis=dict(
         	title='Time',
@@ -108,51 +134,61 @@ layout = Layout(title='Time Series',
     	height=600
 	)
 
-# Make a figure object
-fig = Figure(data=data, layout=layout)
 
+<<<<<<< HEAD
 # (@) Send fig to Plotly, initialize streaming plot, open new tab
 unique_url = py.plot(fig, filename='s8_first-stream')
+=======
+fig = Figure(data=data, layout=layout)
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 
+#unique_url = py.plot(fig, filename='s7_first-stream')
+print( py.plot(fig, filename='Raspberry Pi Streaming Example Values'))
 
-# (@) Make instance of the Stream link object, 
-#     with same stream id as Stream id object
 s = py.Stream(stream_ids[0])
-t = py.Stream(stream_ids[1])
-u = py.Stream(stream_ids[2])
-v = py.Stream(stream_ids[3])
+#t = py.Stream(stream_ids[1])
+#u = py.Stream(stream_ids[2])
+#v = py.Stream(stream_ids[3])
 
-# (@) Open the stream
+
 s.open()
-t.open()
-u.open()
-v.open()
+#t.open()
+#u.open()
+#v.open()
 
-# (*) Import module keep track and format current time
-import datetime 
-import time   
- 
-i = 0    # a counter
-k = 5    # some shape parameter
-N = 800  # number of points to be plotted
 
+
+<<<<<<< HEAD
 # Delay start of stream by 5 sec (time to switch tabs)
 #time.sleep(5) 
+=======
+###############################################
+
+i = 0
+k = 5
+N = 800
+
+time.sleep(5)
+
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 
 i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_fxos8700.FXOS8700(i2c)
 
+<<<<<<< HEAD
 #while True:
 while i<N:
 # Simple demo of the FXOS8700 accelerometer and magnetometer.
 # Will print the acceleration and magnetometer values every second
+=======
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857
 
+while True:
 
-# Initialize I2C bus and device.
-# Optionally create the sensor with a different accelerometer range (the
-# default is 2G, but you can use 4G or 8G values):
+#while i<N:
 #sensor = adafruit_fxos8700.FXOS8700(i2c, accel_range=adafruit_fxos8700.ACCEL_RANGE_4G)
 #sensor = adafruit_fxos8700.FXOS8700(i2c, accel_range=adafruit_fxos8700.ACCEL_RANGE_8G)
+<<<<<<< HEAD
  #   accel_x, accel_y, accel_z = sensor.accelerometer
 
 
@@ -182,3 +218,21 @@ s.close()
 t.close()
 u.close()
 v.close()
+=======
+	accel_x, accel_y, accel_z = sensor.accelerometer
+	x = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+
+	s.write(dict(x=x, y=accel_x))
+#	t.write(dict(x=x, y=accel_y))
+#    	u.write(dict(x=x, y=accel_z))
+#	v.write(dict(x=x, y=accel_x))
+	i += 1
+	time.sleep(0.25)
+
+
+s.close()
+#t.close()
+#u.close()
+#v.close()
+
+>>>>>>> 90cf1c681b1eccef7fdc7ad4888d40927246d857

@@ -3,9 +3,9 @@
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get install -y build-essential python-dev python-pip python-smbus python3-pip
+sudo apt-get install -y build-essential python-dev python-smbus
 
-pip3 install --user RPi.GPIO setuptools
+python3 -m pip install --user RPi.GPIO setuptools
 
 sudo apt-get install -y i2c-tools
 
