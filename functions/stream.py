@@ -144,12 +144,6 @@ i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_fxos8700.FXOS8700(i2c)
 
 
-X =[]
-Y =[]
-Z =[]
-T =[]
-
-
 while True:
 
 #while i<N:
