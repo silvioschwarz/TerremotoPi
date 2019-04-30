@@ -12,7 +12,9 @@ def main():
 	#print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*fxos.accelerometer))
 	#print('Magnetometer (uTesla): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*fxos.magnetometer))
 	#print('Gyroscope (radians/s): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*fxas.gyroscope))
-	return np.array(*fxos.accelerometer)
+	print ( np.array([*fxos.accelerometer]))
+
+	return np.array([*fxos.accelerometer])
 
 
 if __name__ == '__main__':
