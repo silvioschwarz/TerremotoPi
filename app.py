@@ -10,7 +10,7 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
 
-import pandas as pd
+#import pandas as pd
 import numpy as np
 from flask import Flask
 import os
@@ -59,7 +59,7 @@ app.layout = html.Div([
         html.Div([
             dcc.Graph(id='acceleration'),
         ], className='twelve columns acceleration'),
-        dcc.Interval(id='acceleration-update', interval=100, n_intervals=0),
+        dcc.Interval(id='acceleration-update', interval=1000, n_intervals=0),
     ], className='row acceleration-row')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
