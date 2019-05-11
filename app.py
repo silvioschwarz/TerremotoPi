@@ -11,7 +11,7 @@ from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
 
 #import pandas as pd
-import numpy as np
+#import numpy as np
 from flask import Flask
 import os
 import sqlite3
