@@ -10,11 +10,9 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
 
-import pandas as pd
-#import numpy as np
+import numpy
+import pandas
 from flask import Flask
-#import os
-#import sqlite3
 import datetime as dt
 
 import board
@@ -52,7 +50,7 @@ app = dash.Dash(
 #    'requests_pathname_prefix': '/terremotopi/'
 #})
 
-app.config.requests_pathname_prefix = ''
+#app.config.requests_pathname_prefix = ''
 server = app.server
 
 #app.css.config.serve_locally = True
@@ -89,7 +87,7 @@ def gen_wind_speed(interval):
     Z.append(accel_z)
     Time.append(t)
 
-    trace1 = Scatter(
+    trace1 = go.Scatter(
 	x=[Time],
         y=[X],
        # line=scatter.Line(
@@ -99,7 +97,7 @@ def gen_wind_speed(interval):
 	name='X'
     )
 
-    trace2 = Scatter(
+    trace2 = go.Scatter(
 	x=[Time],
         y=[Y],
         #line= scatter.Line(
@@ -109,7 +107,7 @@ def gen_wind_speed(interval):
 	name='Y'
     )
 
-    trace3 = Scatter(
+    trace3 = go.Scatter(
 	x=[Time],
         y=[Z],
         #line= scatter.Line(
@@ -119,37 +117,38 @@ def gen_wind_speed(interval):
 	name='Z'
     )
 
-    layout = Layout(
-        height=450,
-        xaxis=dict(
-            range=[0, 200],
-            showgrid=False,
-            showline=False,
-            zeroline=False,
-            fixedrange=True,
-            tickvals=[0, 50, 100, 150, 200],
-            ticktext=['200', '150', '100', '50', '0'],
-            title='Time Elapsed (sec)'
-        ),
-        yaxis=dict(
-            range=[min(0, min(X)),
-                   max(20, max(X)+max(X))],
-            showline=False,
-            fixedrange=True,
-            zeroline=False,
-            nticks=6
-        ),
-        margin= lo.Margin(
-            t=45,
-            l=50,
-            r=50
-        ),
-	transition=dict(
-                duration=500,
-                easing="cubic-in-out")
-    )
+    #layout = go.layout(
+    #    height=450,
+    #    xaxis=dict(
+    #        range=[0, 200],
+    #        showgrid=False,
+    #        showline=False,
+    #        zeroline=False,
+    #        fixedrange=True,
+    #        tickvals=[0, 50, 100, 150, 200],
+    #        ticktext=['200', '150', '100', '50', '0'],
+    #       title='Time Elapsed (sec)'
+    #    ),
+    #    yaxis=dict(
+    #        range=[min(0, min(X)),
+    #               max(20, max(X)+max(X))],
+    #        showline=False,
+    #        fixedrange=True,
+    #        zeroline=False,
+    #        nticks=6
+    #    ),
+    #    margin= lo.Margin(
+    #        t=45,
+    #        l=50,
+    #        r=50
+    #    ),
+    #    transition=dict(
+    #            duration=500,
+    #            easing="cubic-in-out")
+    #)
 
-    return Figure(data=[trace1, trace2, trace3], layout=layout)
+    return Figure(data=[trace1, trace2, trace3])
+#, layout=layout)
 
 
 if __name__ == '__main__':
