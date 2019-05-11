@@ -10,16 +10,26 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
 
-#import pandas as pd
-import numpy as np
+import pandas as pd
+#import numpy as np
 from flask import Flask
-import os
-import sqlite3
+#import os
+#import sqlite3
 import datetime as dt
 
 import board
 import busio
 import adafruit_fxos8700
+
+freq= 10
+duration = 200 * freq
+X = [0] * duration
+Y = [0] * duration
+Z = [0] * duration
+Time = [0] * duration
+i2c = busio.I2C(board.SCL, board.SDA)
+sensor = adafruit_fxos8700.FXOS8700(i2c)
+
 
 #https://github.com/plotly/dash-wind-streaming
 
@@ -65,14 +75,7 @@ app.layout = html.Div([
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'}
 )
-freq= 10
-duration = 200 * freq
-X = [0] * duration
-Y = [0] * duration
-Z = [0] * duration
-Time = [0] * duration
-i2c = busio.I2C(board.SCL, board.SDA)
-sensor = adafruit_fxos8700.FXOS8700(i2c)
+
 
 
 @app.callback(Output('acceleration', 'figure'), [Input('acceleration-update', 'n_intervals')])
