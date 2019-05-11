@@ -22,6 +22,12 @@ import os
 import sqlite3
 import datetime as dt
 
+import board
+import busio
+import adafruit_fxos8700
+
+from data.readSensor import readSensor
+
 #https://github.com/plotly/dash-wind-streaming
 
 external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
@@ -60,31 +66,55 @@ app.layout = html.Div([
         html.Div([
             dcc.Graph(id='acceleration'),
         ], className='twelve columns acceleration'),
-        dcc.Interval(id='acceleration-update', interval=1000, n_intervals=0),
+        dcc.Interval(id='acceleration-update', interval=100, n_intervals=0),
     ], className='row acceleration-row')
 ], style={'padding': '0px 10px 15px 10px',
           'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
           'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'}
 )
+freq= 10
+duration = 200 * freq
+#X = np.zeros(duration)
+#Y = np.zeros(duration)
+#Z = np.zeros(duration)
+#Time = np.zeros(duration)
+
+X = [0] * duration
+Y = [0] * duration
+Z = [0] * duration
+Time = [0] * duration
+i2c = busio.I2C(board.SCL, board.SDA)
+sensor = adafruit_fxos8700.FXOS8700(i2c)
 
 
 @app.callback(Output('acceleration', 'figure'), [Input('acceleration-update', 'n_intervals')])
 def gen_wind_speed(interval):
-    now = dt.datetime.now()
-    sec = now.second
-    minute = now.minute
-    hour = now.hour
+    #readSensor()
 
-    total_time = (hour * 3600) + (minute * 60) + (sec)
+    accel_x, accel_y, accel_z = sensor.accelerometer
+    t = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
 
-    con = sqlite3.connect("./data/acceleration-data.db")
-    df = pd.read_sql_query('SELECT Time, X, Y, Z from acceleration where\
-                            rowid > "{}" AND rowid <= "{}";'
-                            .format(total_time-200, total_time), con)
+    X.append(accel_x)
+    Y.append(accel_y)
+    Z.append(accel_z)
+    Time.append(t)
+
+#    now = dt.datetime.now()
+#    sec = now.second
+#    minute = now.minute
+#    hour = now.hour
+#    microsec = now.microsecond
+
+#    totaltime = ((hour * 3600) + (minute * 60) + (sec))*1000 + microsec
+
+#    con = sqlite3.connect("./data/accelerationDB.db")
+#    df = pd.read_sql_query('SELECT Time, X, Y, Z from acceleration where\
+                    #        rowid > "{}" AND rowid <= "{}";'
+                     #       .format(totaltime-200000, totaltime), con)
 
     trace1 = Scatter(
-	#x=df['Time'],
-        y=df['X'],
+	x=[Time],
+        y=[X],
        # line=scatter.Line(
        #     color='#42C4F7'
         #),
@@ -93,8 +123,8 @@ def gen_wind_speed(interval):
     )
 
     trace2 = Scatter(
-	#x=df['Time'],
-        y=df['Y'],
+	x=[Time],
+        y=[Y],
         #line= scatter.Line(
         #    color='#42C4F7'
         #),
@@ -103,8 +133,8 @@ def gen_wind_speed(interval):
     )
 
     trace3 = Scatter(
-	#x=df['Time'],
-        y=df['Z'],
+	x=[Time],
+        y=[Z],
         #line= scatter.Line(
         #    color='#42C4F7'
         #),
@@ -125,12 +155,12 @@ def gen_wind_speed(interval):
             title='Time Elapsed (sec)'
         ),
         yaxis=dict(
-            range=[min(0, min(df['X'])),
-                   max(20, max(df['X'])+max(df['X']))],
+            range=[min(0, min(X)),
+                   max(20, max(X)+max(X))],
             showline=False,
             fixedrange=True,
             zeroline=False,
-            nticks=max(6, round(df['Z'].iloc[-1]/10))
+            nticks=6
         ),
         margin= lo.Margin(
             t=45,
