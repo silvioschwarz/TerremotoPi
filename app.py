@@ -19,14 +19,7 @@ import board
 import busio
 import adafruit_fxos8700
 
-freq= 10
-duration = 200 * freq
-X = [0] * duration
-Y = [0] * duration
-Z = [0] * duration
-Time = [0] * duration
-i2c = busio.I2C(board.SCL, board.SDA)
-sensor = adafruit_fxos8700.FXOS8700(i2c)
+
 
 
 #https://github.com/plotly/dash-wind-streaming
@@ -75,6 +68,14 @@ app.layout = html.Div([
 )
 
 
+freq= 10
+duration = 200 * freq
+X = [0] * duration
+Y = [0] * duration
+Z = [0] * duration
+Time = [0] * duration
+i2c = busio.I2C(board.SCL, board.SDA)
+sensor = adafruit_fxos8700.FXOS8700(i2c)
 
 @app.callback(Output('acceleration', 'figure'), [Input('acceleration-update', 'n_intervals')])
 def gen_wind_speed(interval):
@@ -147,8 +148,7 @@ def gen_wind_speed(interval):
     #            easing="cubic-in-out")
     #)
 
-    return Figure(data=[trace1, trace2, trace3])
-#, layout=layout)
+    return Figure(data=[trace1, trace2, trace3], layout=layout)
 
 
 if __name__ == '__main__':
