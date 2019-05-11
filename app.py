@@ -1,13 +1,7 @@
 #! /bin/python3
 
-import dash_table
 import plotly
 import plotly.graph_objs as go
-
-import pandas as pd
-import numpy as np
-from flask import Flask
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -15,9 +9,10 @@ from dash.dependencies import Input, Output, State
 import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
-from flask import Flask
-import numpy as np
+
 import pandas as pd
+import numpy as np
+from flask import Flask
 import os
 import sqlite3
 import datetime as dt
@@ -25,8 +20,6 @@ import datetime as dt
 import board
 import busio
 import adafruit_fxos8700
-
-from data.readSensor import readSensor
 
 #https://github.com/plotly/dash-wind-streaming
 
@@ -74,11 +67,6 @@ app.layout = html.Div([
 )
 freq= 10
 duration = 200 * freq
-#X = np.zeros(duration)
-#Y = np.zeros(duration)
-#Z = np.zeros(duration)
-#Time = np.zeros(duration)
-
 X = [0] * duration
 Y = [0] * duration
 Z = [0] * duration
@@ -89,7 +77,6 @@ sensor = adafruit_fxos8700.FXOS8700(i2c)
 
 @app.callback(Output('acceleration', 'figure'), [Input('acceleration-update', 'n_intervals')])
 def gen_wind_speed(interval):
-    #readSensor()
 
     accel_x, accel_y, accel_z = sensor.accelerometer
     t = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
@@ -98,19 +85,6 @@ def gen_wind_speed(interval):
     Y.append(accel_y)
     Z.append(accel_z)
     Time.append(t)
-
-#    now = dt.datetime.now()
-#    sec = now.second
-#    minute = now.minute
-#    hour = now.hour
-#    microsec = now.microsecond
-
-#    totaltime = ((hour * 3600) + (minute * 60) + (sec))*1000 + microsec
-
-#    con = sqlite3.connect("./data/accelerationDB.db")
-#    df = pd.read_sql_query('SELECT Time, X, Y, Z from acceleration where\
-                    #        rowid > "{}" AND rowid <= "{}";'
-                     #       .format(totaltime-200000, totaltime), con)
 
     trace1 = Scatter(
 	x=[Time],
