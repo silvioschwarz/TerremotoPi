@@ -10,10 +10,10 @@ fxas = adafruit_fxas21002c.FXAS21002C(i2c)
 
 fileName = "./logs/log-"+datetime.utcnow().strftime("%Y-%m-%d-%H:%M:%S"+".csv")
 file = open(fileName, "a")
-file.write(datetime.now().strftime("%Y%m%d-%H%M%S")+","+\
+file.write("Time"+","+\
 	"Acceleration X (m/s^2),Acceleration Y (m/s^2),Acceleration Z (m/s^2)"+","+\
 	"Magnetometer X (uTesla), Magnetometer Y (uTesla)  , Magnetometer Z (uTesla)"+","+\
-	"Gyroscope X (radians/s), Gyroscope Y (radians/s), Gyroscope Z (radians/s)")
+	"Gyroscope X (radians/s), Gyroscope Y (radians/s), Gyroscope Z (radians/s)\n")
 
 while True:
 # Read acceleration & magnetometer.
