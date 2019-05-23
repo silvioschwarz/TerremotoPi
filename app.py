@@ -7,11 +7,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 import plotly.plotly as py
-from plotly.graph_objs import *
+#from plotly.graph_objs import *
 import plotly.graph_objs.layout as lo
 
-import numpy
-import pandas
+#import numpy
+#import pandas
 from flask import Flask
 import datetime as dt
 
@@ -118,37 +118,38 @@ def gen_wind_speed(interval):
 	name='Z'
     )
 
-    #layout = go.layout(
-    #    height=450,
-    #    xaxis=dict(
-    #        range=[0, 200],
-    #        showgrid=False,
-    #        showline=False,
-    #        zeroline=False,
-    #        fixedrange=True,
-    #        tickvals=[0, 50, 100, 150, 200],
-    #        ticktext=['200', '150', '100', '50', '0'],
-    #       title='Time Elapsed (sec)'
-    #    ),
-    #    yaxis=dict(
-    #        range=[min(0, min(X)),
-    #               max(20, max(X)+max(X))],
-    #        showline=False,
-    #        fixedrange=True,
-    #        zeroline=False,
-    #        nticks=6
-    #    ),
-    #    margin= lo.Margin(
-    #        t=45,
-    #        l=50,
-    #        r=50
-    #    ),
-    #    transition=dict(
-    #            duration=500,
-    #            easing="cubic-in-out")
-    #)
+    layout = go.Layout(
+        height=450,
+        xaxis=dict(
+            range=[0, 200],
+            showgrid=False,
+            showline=False,
+            zeroline=False,
+            fixedrange=True,
+            tickvals=[0, 50, 100, 150, 200],
+            ticktext=['200', '150', '100', '50', '0'],
+           title='Time Elapsed (sec)'
+        ),
+        yaxis=dict(
+            range=[min(0, min(X)),
+                   max(20, max(X)+max(X))],
+            showline=False,
+            fixedrange=True,
+            zeroline=False,
+            nticks=6
+        ),
+        margin= lo.Margin(
+            t=45,
+            l=50,
+            r=50
+        )
+#,
+#        transition=dict(
+#                duration=500,
+#                easing="cubic-in-out")
+    )
 
-    return Figure(data=[trace1, trace2, trace3], layout=layout)
+    return go.Figure(data=[trace1, trace2, trace3], layout=layout)
 
 
 if __name__ == '__main__':
